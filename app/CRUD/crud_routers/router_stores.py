@@ -1,0 +1,28 @@
+from app.CRUD.crud_routers.router_base_imports import *
+from app.CRUD.crud_models import crud_stores
+from app.CRUD.crud_validation.validation_stores import StoreResponse, StoreUpdate, StoreCreate
+
+router = APIRouter()
+
+
+@router.post("/stores")
+async def create_store_endpoint(store_data: StoreCreate, db: AsyncSession = Depends(get_db)):
+    await crud_stores.create_store(db, store_data)
+    return {"message": "Магазин успешно создан"}
+
+
+@router.get("/stores", response_model=List[StoreResponse])
+async def get_stores_endpoint(db: AsyncSession = Depends(get_db)):
+    return await crud_stores.get_stores(db)
+
+
+@router.put("/stores")
+async def update_store_endpoint(store_data: StoreUpdate, db: AsyncSession = Depends(get_db)):
+    await crud_stores.update_store(db, store_data)
+    return {"message": "Магазин успешно обновлен"}
+
+
+@router.delete("/stores/{store_id}")
+async def delete_store_endpoint(store_id: int, db: AsyncSession = Depends(get_db)):
+    await crud_stores.delete_store(db, store_id)
+    return {"message": "Магазин успешно удален"}

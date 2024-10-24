@@ -1,0 +1,49 @@
+POST http://127.0.0.1:8000/api/sales
+Accept: application/json
+Content-Type: application/json
+
+{
+  "sale_id": 40,
+  "store_id": 1,
+  "items": [
+    {
+      "product_id": 5,
+      "count": 5
+    },
+    {
+      "product_id": 3,
+      "count": 1
+    }
+  ]
+}
+
+###
+
+GET http://127.0.0.1:8000/api/sales
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/api/sales
+Accept: application/json
+Content-Type: application/json
+
+{
+  "sale_id": 40,
+  "store_id": 3,
+  "items": [
+    {
+      "product_id": 8,
+      "count": 3
+    },
+    {
+      "product_id": 3,
+      "count": 1
+    }
+  ]
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/sales/1
+Accept: application/json

@@ -1,0 +1,31 @@
+POST http://127.0.0.1:8000/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product_id": 15,
+  "name": "Тостер",
+  "price": 4990.10
+}
+
+###
+
+GET http://127.0.0.1:8000/api/products
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product_id": 15,
+  "name": "Кофемолка",
+  "price": 5190.50
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/products/15
+Accept: application/json

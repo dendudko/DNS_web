@@ -1,0 +1,30 @@
+POST http://127.0.0.1:8000/api/cities
+Accept: application/json
+Content-Type: application/json
+
+{
+  "city_id": 4,
+  "name": "Хабаровск"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/cities
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/api/cities
+Accept: application/json
+Content-Type: application/json
+
+{
+  "city_id": 4,
+  "name": "Благовещенск"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/cities/4
+Accept: application/json
+

@@ -1,0 +1,31 @@
+POST http://127.0.0.1:8000/api/stores
+Accept: application/json
+Content-Type: application/json
+
+{
+  "store_id": 16,
+  "name": "Быт",
+  "city_id": 2
+}
+
+###
+
+GET http://127.0.0.1:8000/api/stores
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/api/stores
+Accept: application/json
+Content-Type: application/json
+
+{
+  "store_id": 16,
+  "name": "Не быт",
+  "city_id": 3
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/stores/16
+Accept: application/json

@@ -1,0 +1,50 @@
+GET http://127.0.0.1:8000/api/sales/filter
+Accept: application/json
+Content-Type: application/json
+
+{
+  "quantity": 3,
+  "quantity_comparison": "less"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/sales/filter
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product_id": 2
+}
+
+###
+
+GET http://127.0.0.1:8000/api/sales/filter
+Accept: application/json
+Content-Type: application/json
+
+{
+  "last_days": 3,
+  "city_id": 1
+}
+
+###
+
+GET http://127.0.0.1:8000/api/sales/filter
+Accept: application/json
+Content-Type: application/json
+
+{
+  "sale_id": 5
+}
+
+###
+
+GET http://127.0.0.1:8000/api/sales/filter
+Accept: application/json
+Content-Type: application/json
+
+{
+  "amount": 50000,
+  "city_id": 1
+}
