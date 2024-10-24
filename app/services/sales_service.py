@@ -1,6 +1,6 @@
 from app.services.base_imports import *
 from app.entities.models import Sale, Store, Product, SaleItem
-from app.dto.validation_sales import (List, SaleCreate, SaleResponse,
+from app.dto.validation_sales import (SaleCreate, SaleResponse,
                                       ProductResponseExt, StoreResponse)
 
 

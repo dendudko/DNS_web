@@ -1,6 +1,6 @@
 from app.services.base_imports import *
 from app.entities.models import Store
-from app.dto.validation_stores import List, StoreResponse, StoreUpdate, StoreCreate
+from app.dto.validation_stores import StoreResponse, StoreUpdate, StoreCreate
 
 
 async def create_store(db: AsyncSession, store_data: StoreCreate) -> None:

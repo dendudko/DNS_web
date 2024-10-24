@@ -1,6 +1,6 @@
 from app.services.base_imports import *
 from app.entities.models import City
-from app.dto.validation_cities import List, CityResponse
+from app.dto.validation_cities import CityResponse
 
 
 async def create_city(db: AsyncSession, city_data: CityResponse) -> None:

@@ -3,9 +3,10 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy import func
 from datetime import datetime, timedelta
+from typing import List
 from app.entities.models import Sale, Store, City, Product, SaleItem
 from app.dto.validation_methods import MethodsRequest
-from app.dto.validation_sales import List, SaleResponse, ProductResponseExt, StoreResponse
+from app.dto.validation_sales import SaleResponse, ProductResponseExt, StoreResponse
 
 
 async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[SaleResponse]:

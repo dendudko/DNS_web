@@ -1,6 +1,6 @@
 from app.services.base_imports import *
 from app.entities.models import Product
-from app.dto.validation_products import List, ProductResponse, ProductUpdate
+from app.dto.validation_products import ProductResponse, ProductUpdate
 
 
 async def create_product(db: AsyncSession, product_data: ProductResponse) -> None:
