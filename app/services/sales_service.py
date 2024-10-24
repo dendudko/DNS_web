@@ -1,7 +1,7 @@
-from app.CRUD.crud_models.crud_base_imports import *
-from app.database.models import Sale, Store, Product, SaleItem
-from app.CRUD.crud_validation.validation_sales import (List, SaleCreate, SaleResponse,
-                                                       ProductResponse, StoreResponse)
+from app.services.base_imports import *
+from app.entities.models import Sale, Store, Product, SaleItem
+from app.dto.validation_sales import (List, SaleCreate, SaleResponse,
+                                      ProductResponseExt, StoreResponse)
 
 
 async def create_sale_items(db: AsyncSession, sale_data: SaleCreate):
@@ -48,7 +48,7 @@ async def get_sales(db: AsyncSession) -> List[SaleResponse]:
             product_query = await db.execute(select(Product).where(item.product_id == Product.id))
             product = product_query.scalar_one()
             total_product_price = product.price * item.count
-            sale_items_response.append(ProductResponse(
+            sale_items_response.append(ProductResponseExt(
                 product_id=product.id,
                 name=product.name,
                 price=product.price,

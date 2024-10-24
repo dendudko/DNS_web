@@ -4,7 +4,7 @@ from os.path import dirname, abspath
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 from app.database.db_connector import DATABASE_URL
-from app.database.models import Base, City, Store, Product, Sale, SaleItem
+from app.entities.models import Base
 
 import asyncio
 from logging.config import fileConfig

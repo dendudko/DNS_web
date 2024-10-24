@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 import asyncio
 from datetime import datetime
-from app.database.models import City, Store, Product, Sale, SaleItem
+from app.entities.models import City, Store, Product, Sale, SaleItem
 from app.database.db_connector import get_db
 
 

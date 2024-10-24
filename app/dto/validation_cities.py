@@ -1,4 +1,4 @@
-from app.CRUD.crud_validation.validation_base_imports import *
+from pydantic import BaseModel
 
 
 class CityResponse(BaseModel):

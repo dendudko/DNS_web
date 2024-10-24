@@ -3,9 +3,9 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy import func
 from datetime import datetime, timedelta
-from app.database.models import Sale, Store, City, Product, SaleItem
-from app.METHODS.validation_methods import MethodsRequest
-from app.CRUD.crud_validation.validation_sales import List, SaleResponse, ProductResponse, StoreResponse
+from app.entities.models import Sale, Store, City, Product, SaleItem
+from app.dto.validation_methods import MethodsRequest
+from app.dto.validation_sales import List, SaleResponse, ProductResponseExt, StoreResponse
 
 
 async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[SaleResponse]:
@@ -53,7 +53,7 @@ async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[
             product = item.product
             total_product_price = product.price * item.count
 
-            sale_items_response.append(ProductResponse(
+            sale_items_response.append(ProductResponseExt(
                 product_id=product.id,
                 name=product.name,
                 price=product.price,

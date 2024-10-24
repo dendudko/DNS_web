@@ -1,26 +1,19 @@
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
+from app.dto.validation_stores import StoreResponse
+from app.dto.validation_products import ProductResponse
 
 
-class ProductResponse(BaseModel):
-    product_id: int
-    name: str
-    price: float
+class ProductResponseExt(ProductResponse):
     count: int
     total_product_price: float
-
-
-class StoreResponse(BaseModel):
-    store_id: int
-    name: str
-    city: str
 
 
 class SaleResponse(BaseModel):
     sale_id: int
     store: StoreResponse
-    items: List[ProductResponse]
+    items: List[ProductResponseExt]
     total_price: float
     sale_datetime: datetime = None
 

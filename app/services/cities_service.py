@@ -1,6 +1,6 @@
-from app.CRUD.crud_models.crud_base_imports import *
-from app.database.models import City
-from app.CRUD.crud_validation.validation_cities import List, CityResponse
+from app.services.base_imports import *
+from app.entities.models import City
+from app.dto.validation_cities import List, CityResponse
 
 
 async def create_city(db: AsyncSession, city_data: CityResponse) -> None:

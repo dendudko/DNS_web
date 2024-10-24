@@ -1,6 +1,6 @@
-from app.CRUD.crud_models.crud_base_imports import *
-from app.database.models import Product
-from app.CRUD.crud_validation.validation_products import List, ProductResponse, ProductUpdate
+from app.services.base_imports import *
+from app.entities.models import Product
+from app.dto.validation_products import List, ProductResponse, ProductUpdate
 
 
 async def create_product(db: AsyncSession, product_data: ProductResponse) -> None:

@@ -1,6 +1,6 @@
-from app.CRUD.crud_models.crud_base_imports import *
-from app.database.models import Store
-from app.CRUD.crud_validation.validation_stores import List, StoreResponse, StoreUpdate, StoreCreate
+from app.services.base_imports import *
+from app.entities.models import Store
+from app.dto.validation_stores import List, StoreResponse, StoreUpdate, StoreCreate
 
 
 async def create_store(db: AsyncSession, store_data: StoreCreate) -> None:
