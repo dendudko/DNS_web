@@ -7,8 +7,7 @@ from app.database.db_connector import get_db
 
 
 async def clear_tables(db: AsyncSession):
-    await db.execute(text("DELETE FROM sale_items;"))
-    for table in 'sales', 'stores', 'cities', 'products':
+    for table in 'sale_items', 'sales', 'stores', 'cities', 'products':
         await db.execute(text(f"DELETE FROM {table};"))
     await db.commit()
 
