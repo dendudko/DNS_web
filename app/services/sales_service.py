@@ -1,10 +1,10 @@
 from app.services.base_imports import *
 from app.entities.models import Sale, Store, Product, SaleItem
-from app.dto.validation_sales import (SaleCreate, SaleResponse,
-                                      ProductResponseExt, StoreResponse)
+from app.dto.sales_dto import (SSaleCreate, SSaleResponse,
+                               SProductExt, SStoreResponse)
 
 
-async def create_sale_items(db: AsyncSession, sale_data: SaleCreate):
+async def create_sale_items(db: AsyncSession, sale_data: SSaleCreate):
     for item_data in sale_data.items:
         product_query = await db.execute(select(Product).where(item_data.product_id == Product.id))
         product = product_query.scalar_one_or_none()
@@ -18,7 +18,7 @@ async def create_sale_items(db: AsyncSession, sale_data: SaleCreate):
         db.add(sale_item)
 
 
-async def create_sale(db: AsyncSession, sale_data: SaleCreate) -> None:
+async def create_sale(db: AsyncSession, sale_data: SSaleCreate) -> None:
     store_query = await db.execute(select(Store).where(sale_data.store_id == Store.id))
     store = store_query.scalar_one_or_none()
     if not store:
@@ -30,7 +30,7 @@ async def create_sale(db: AsyncSession, sale_data: SaleCreate) -> None:
     await db.commit()
 
 
-async def get_sales(db: AsyncSession) -> List[SaleResponse]:
+async def get_sales(db: AsyncSession) -> List[SSaleResponse]:
     sales_query = await db.execute(
         select(Sale)
         .options(selectinload(Sale.items))
@@ -48,7 +48,7 @@ async def get_sales(db: AsyncSession) -> List[SaleResponse]:
             product_query = await db.execute(select(Product).where(item.product_id == Product.id))
             product = product_query.scalar_one()
             total_product_price = product.price * item.count
-            sale_items_response.append(ProductResponseExt(
+            sale_items_response.append(SProductExt(
                 product_id=product.id,
                 name=product.name,
                 price=product.price,
@@ -58,9 +58,9 @@ async def get_sales(db: AsyncSession) -> List[SaleResponse]:
             )
             total_price += total_product_price
 
-        sale_response = SaleResponse(
+        sale_response = SSaleResponse(
             sale_id=sale.id,
-            store=StoreResponse(
+            store=SStoreResponse(
                 store_id=store.id,
                 name=store.name,
                 city=store.city.name
@@ -73,7 +73,7 @@ async def get_sales(db: AsyncSession) -> List[SaleResponse]:
     return sales_with_items
 
 
-async def update_sale(db: AsyncSession, sale_data: SaleCreate) -> None:
+async def update_sale(db: AsyncSession, sale_data: SSaleCreate) -> None:
     sale_query = await db.execute(select(Sale).where(sale_data.sale_id == Sale.id))
     sale = sale_query.scalar_one_or_none()
     if not sale:

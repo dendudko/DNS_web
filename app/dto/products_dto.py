@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 
-class ProductResponse(BaseModel):
+class SProduct(BaseModel):
     product_id: int
     name: str
     price: float
 
 
-class ProductUpdate(BaseModel):
+class SProductUpdate(BaseModel):
     product_id: int
     name: str = None
     price: float = None

@@ -1,23 +1,23 @@
 from app.routes.base_imports import *
 from app.services import products_service
-from app.dto.validation_products import ProductResponse, ProductUpdate
+from app.dto.products_dto import SProduct, SProductUpdate
 
 router = APIRouter()
 
 
 @router.post("/products")
-async def create_product_endpoint(product_data: ProductResponse, db: AsyncSession = Depends(get_db)):
+async def create_product_endpoint(product_data: SProduct, db: AsyncSession = Depends(get_db)):
     await products_service.create_product(db, product_data)
     return {"message": "Товар успешно создан"}
 
 
-@router.get("/products", response_model=List[ProductResponse])
+@router.get("/products", response_model=List[SProduct])
 async def get_products_endpoint(db: AsyncSession = Depends(get_db)):
     return await products_service.get_products(db)
 
 
 @router.put("/products")
-async def update_product_endpoint(product_data: ProductUpdate, db: AsyncSession = Depends(get_db)):
+async def update_product_endpoint(product_data: SProductUpdate, db: AsyncSession = Depends(get_db)):
     await products_service.update_product(db, product_data)
     return {"message": "Товар успешно обновлен"}
 

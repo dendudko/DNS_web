@@ -5,11 +5,11 @@ from sqlalchemy import func
 from datetime import datetime, timedelta
 from typing import List
 from app.entities.models import Sale, Store, City, Product, SaleItem
-from app.dto.validation_methods import MethodsRequest
-from app.dto.validation_sales import SaleResponse, ProductResponseExt, StoreResponse
+from app.dto.methods_dto import SMethodsRequest
+from app.dto.sales_dto import SSaleResponse, SProductExt, SStoreResponse
 
 
-async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[SaleResponse]:
+async def get_sales_combined(db: AsyncSession, methods: SMethodsRequest) -> List[SSaleResponse]:
     query = (select(Sale).
              options(selectinload(Sale.store).selectinload(Store.city),
                      selectinload(Sale.items).selectinload(SaleItem.product))
@@ -54,7 +54,7 @@ async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[
             product = item.product
             total_product_price = product.price * item.count
 
-            sale_items_response.append(ProductResponseExt(
+            sale_items_response.append(SProductExt(
                 product_id=product.id,
                 name=product.name,
                 price=product.price,
@@ -62,9 +62,9 @@ async def get_sales_combined(db: AsyncSession, methods: MethodsRequest) -> List[
                 total_product_price=total_product_price
             ))
 
-        sale_response = SaleResponse(
+        sale_response = SSaleResponse(
             sale_id=sale.id,
-            store=StoreResponse(
+            store=SStoreResponse(
                 store_id=store.id,
                 name=store.name,
                 city=store.city.name

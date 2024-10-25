@@ -1,21 +1,21 @@
 from app.services.base_imports import *
 from app.entities.models import Store
-from app.dto.validation_stores import StoreResponse, StoreUpdate, StoreCreate
+from app.dto.stores_dto import SStoreResponse, SStoreUpdate, SStoreCreate
 
 
-async def create_store(db: AsyncSession, store_data: StoreCreate) -> None:
+async def create_store(db: AsyncSession, store_data: SStoreCreate) -> None:
     db.add(Store(id=store_data.store_id, name=store_data.name, city_id=store_data.city_id))
     await db.commit()
 
 
-async def get_stores(db: AsyncSession) -> List[StoreResponse]:
+async def get_stores(db: AsyncSession) -> List[SStoreResponse]:
     stores_query = await db.execute(select(Store).options(selectinload(Store.city)))
     stores = stores_query.scalars().all()
-    return [StoreResponse(store_id=store.id, name=store.name, city=store.city.name)
+    return [SStoreResponse(store_id=store.id, name=store.name, city=store.city.name)
             for store in stores]
 
 
-async def update_store(db: AsyncSession, store_data: StoreUpdate) -> None:
+async def update_store(db: AsyncSession, store_data: SStoreUpdate) -> None:
     store_query = await db.execute(select(Store).where(store_data.store_id == Store.id))
     store = store_query.scalar_one_or_none()
     if not store:

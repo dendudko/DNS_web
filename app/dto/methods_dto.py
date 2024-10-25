@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class MethodsRequest(BaseModel):
+class SMethodsRequest(BaseModel):
     city_id: int = None
     store_id: int = None
     product_id: int = None

@@ -1,20 +1,20 @@
 from app.services.base_imports import *
 from app.entities.models import City
-from app.dto.validation_cities import CityResponse
+from app.dto.cities_dto import SCity
 
 
-async def create_city(db: AsyncSession, city_data: CityResponse) -> None:
+async def create_city(db: AsyncSession, city_data: SCity) -> None:
     db.add(City(id=city_data.city_id, name=city_data.name))
     await db.commit()
 
 
-async def get_cities(db: AsyncSession) -> List[CityResponse]:
+async def get_cities(db: AsyncSession) -> List[SCity]:
     cities_query = await db.execute(select(City))
     cities = cities_query.scalars().all()
-    return [CityResponse(city_id=city.id, name=city.name) for city in cities]
+    return [SCity(city_id=city.id, name=city.name) for city in cities]
 
 
-async def update_city(db: AsyncSession, city_data: CityResponse) -> None:
+async def update_city(db: AsyncSession, city_data: SCity) -> None:
     city_query = await db.execute(select(City).where(city_data.city_id == City.id))
     city = city_query.scalar_one_or_none()
     if not city:
